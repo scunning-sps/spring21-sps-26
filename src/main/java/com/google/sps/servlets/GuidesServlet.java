@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.google.sps.data.Guide;
 
+import org.jsoup.Jsoup;
+import org.jsoup.safety.Whitelist;
+
 @WebServlet("/guides")
 public class GuidesServlet extends HttpServlet{
     static final long serialVersionUID = 0;
@@ -26,9 +29,9 @@ public class GuidesServlet extends HttpServlet{
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException{
         int id = ++lastId;
-        String title = request.getParameter("title");
-        String description = request.getParameter("description");
-        String content = request.getParameter("content");
+        String title = Jsoup.clean(request.getParameter("title"), Whitelist.none());
+        String description = Jsoup.clean(request.getParameter("description"), Whitelist.none());
+        String content = Jsoup.clean(request.getParameter("content"), Whitelist.none());
 
         Guide guide = new Guide(id, title, description, content);
 
