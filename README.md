@@ -6,3 +6,79 @@ execute this command:
 ```
 mvn package exec:java
 ```
+
+## API documentation
+
+### Guides: list
+Retreives a list of guides.
+
+#### Request
+
+##### Http request
+
+| Method | Endpoint |
+| --- | --- |
+| `GET` | `/guides` |
+
+##### Parameters
+There are not any parameters for this method at the moment.
+
+##### Request Body
+No need to provide a body with this method.
+
+#### Response
+
+If the request succeeds, the server responds with an HTTP `200 OK`.
+
+##### Response Body
+The body of the response contains a list with the existing guides.
+```JSON
+[
+    {
+        "id": number,
+        "timestamp": number,
+        "title": string,
+        "description": string, 
+        "content": string
+    },
+    ...
+]
+```
+
+### Guides: insert
+Adds a guide.
+
+#### Request
+
+##### Http request
+
+| Method | Endpoint |
+| --- | --- |
+| `POST` | `/guides` |
+
+##### Parameters
+| Parameter Name | Value | Description |
+| --- | --- | --- |
+| **Required parameters** |
+| title | string | Title of the new guide. |
+| description | string | Description of the new guide. |
+| content | string | Content of the new guide. |
+
+##### Request Body
+No need to provide a body with this method.
+
+#### Response
+
+If the request succeeds, the server responds with an HTTP `200 OK`.
+
+##### Response Body
+The body of the response contains the guide that was just added.
+```JSON
+{
+    "id": number,
+    "timestamp": number,
+    "title": string,
+    "description": string, 
+    "content": string
+}
+```
