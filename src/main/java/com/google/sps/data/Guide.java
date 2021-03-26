@@ -14,37 +14,31 @@ public class Guide {
         this.content = content;
         this.timestamp = System.currentTimeMillis();
     }
-    /**
-     * @return the id
-     */
+
+    public Guide(int id, String title, String description, String content, long timestamp){
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.content = content;
+        this.timestamp = timestamp;
+    }
+
     public int getId() {
         return id;
     }
 
-    /**
-     * @return the title
-     */
     public String getTitle() {
         return title;
     }
 
-    /**
-     * @return the description
-     */
     public String getDescription() {
         return description;
     }
 
-    /**
-     * @return the content
-     */
     public String getContent() {
         return content;
     }
 
-    /**
-     * @return the timestamp
-     */
     public long getTimestamp() {
         return timestamp;
     }
