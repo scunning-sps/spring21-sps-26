@@ -1,7 +1,6 @@
 package com.google.sps.servlets;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.google.sps.data.Guide;
+import com.google.sps.storage.DatastoreGuides;
 
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Whitelist;
@@ -17,27 +17,24 @@ import org.jsoup.safety.Whitelist;
 @WebServlet("/guides")
 public class GuidesServlet extends HttpServlet{
     static final long serialVersionUID = 0;
-    private final ArrayList<Guide> guides = new ArrayList<>();
+    private final DatastoreGuides helper = new DatastoreGuides();
     private final Gson gson = new Gson();
-    private int lastId = 0;
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException{
         response.setContentType("application/json");
-        response.getWriter().print(gson.toJson(guides));        
+        response.getWriter().print(gson.toJson(helper.queryAll()));
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException{
-        int id = ++lastId;
         String title = Jsoup.clean(request.getParameter("title"), Whitelist.none());
         String description = Jsoup.clean(request.getParameter("description"), Whitelist.none());
         String content = Jsoup.clean(request.getParameter("content"), Whitelist.none());
 
-        Guide guide = new Guide(id, title, description, content);
+        Guide guide = new Guide(-1, title, description, content);
+        guide = helper.put(guide);
 
         response.setContentType("application/json");
         response.getWriter().print(gson.toJson(guide));
-
-        guides.add(guide);
     }
 }
