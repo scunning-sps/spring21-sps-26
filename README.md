@@ -10,7 +10,7 @@ mvn package exec:java
 ## API documentation
 
 ### Guides: list
-Retreives a list of guides.
+Retrieves a list of guides.
 
 #### Request
 
