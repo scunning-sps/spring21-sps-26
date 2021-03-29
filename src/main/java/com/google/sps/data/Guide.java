@@ -1,13 +1,13 @@
 package com.google.sps.data;
 
 public class Guide {
-    private final int id;
+    private final long id;
     private final String title;
     private final String description;
     private final String content;
     private final long timestamp;
 
-    public Guide(int id, String title, String description, String content){
+    public Guide(long id, String title, String description, String content){
         this.id = id;
         this.title = title;
         this.description = description;
@@ -15,7 +15,7 @@ public class Guide {
         this.timestamp = System.currentTimeMillis();
     }
 
-    public Guide(int id, String title, String description, String content, long timestamp){
+    public Guide(long id, String title, String description, String content, long timestamp){
         this.id = id;
         this.title = title;
         this.description = description;
@@ -23,7 +23,7 @@ public class Guide {
         this.timestamp = timestamp;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
