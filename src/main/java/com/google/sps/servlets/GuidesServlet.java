@@ -31,7 +31,7 @@ public class GuidesServlet extends HttpServlet{
         String description = Jsoup.clean(request.getParameter("description"), Whitelist.none());
         String content = Jsoup.clean(request.getParameter("content"), Whitelist.none());
 
-        Guide guide = new Guide(-1, title, description, content);
+        Guide guide = new Guide(title, description, content);
         guide = helper.put(guide);
 
         response.setContentType("application/json");

@@ -35,17 +35,7 @@ public class DatastoreGuides {
     }
 
     private Guide toGuide(Entity entity){
-        long id = entity.getLong("id");
-        String title = entity.getString("title");
-        String description = entity.getString("description");
-        String content = entity.getString("content");
-        long timestamp = entity.getLong("timestamp");
-
-        return new Guide(id, title, description, content, timestamp);
-    }
-
-    private Guide toGuide(FullEntity<IncompleteKey> entity){
-        long id = entity.getLong("id");
+        long id = entity.getKey().getId();
         String title = entity.getString("title");
         String description = entity.getString("description");
         String content = entity.getString("content");
@@ -65,9 +55,7 @@ public class DatastoreGuides {
     }
 
     public Guide put(Guide guide){
-        FullEntity<IncompleteKey> entity = toEntity(guide);
-        datastore.put(entity);
-        return toGuide(entity);
+        return toGuide(datastore.put(toEntity(guide)));
     }
 
     public List<Guide> queryAll(){

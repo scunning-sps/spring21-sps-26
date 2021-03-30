@@ -7,8 +7,8 @@ public class Guide {
     private final String content;
     private final long timestamp;
 
-    public Guide(long id, String title, String description, String content){
-        this.id = id;
+    public Guide(String title, String description, String content){
+        this.id = -1;
         this.title = title;
         this.description = description;
         this.content = content;
