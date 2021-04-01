@@ -118,3 +118,36 @@ The body of the response contains the guide that was just added.
     "content": string
 }
 ```
+
+### Guides: get
+Gets a guide.
+
+#### Request
+
+##### Http request
+
+| Method | Endpoint |
+| --- | --- |
+| `GET` | `/guides/{guideId}` |
+
+##### Parameters
+There are not any parameters for this method at the moment.
+
+##### Request Body
+No need to provide a body with this method.
+
+#### Response
+
+If the request succeeds, the server responds with an HTTP `200 OK`. 
+
+##### Response Body
+The body of the response contains the guide requested.
+```JSON
+{
+    "id": number,
+    "timestamp": number,
+    "title": string,
+    "description": string, 
+    "content": string
+}
+```
