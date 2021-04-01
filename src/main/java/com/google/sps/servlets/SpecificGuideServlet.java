@@ -9,10 +9,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.google.sps.data.Error;
+import com.google.sps.data.Guide;
+import com.google.sps.storage.DatastoreGuides;
 
 @WebServlet("/guides/*")
 public class SpecificGuideServlet extends HttpServlet{
     static final long serialVersionUID = 0;
+    private final DatastoreGuides helper = new DatastoreGuides();
     private final Gson gson = new Gson();
 
     private long getIdFromPath(String path){
@@ -31,7 +34,15 @@ public class SpecificGuideServlet extends HttpServlet{
             return;
         }
 
-        response.getWriter().println(id);
+        Guide guide = helper.get(id);
+
+        if(guide == null){
+            response.setStatus(404);
+            response.getWriter().print(gson.toJson(new Error("A guide with the specified id does not exist.", 404)));
+            return;
+        }
+
+        response.getWriter().println(gson.toJson(guide));
 
     }
 }

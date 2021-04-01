@@ -35,6 +35,8 @@ public class DatastoreGuides {
     }
 
     private Guide toGuide(Entity entity){
+        if (entity == null) return null;
+        
         long id = entity.getKey().getId();
         String title = entity.getString("title");
         String description = entity.getString("description");
@@ -60,5 +62,9 @@ public class DatastoreGuides {
 
     public List<Guide> queryAll(){
         return listFromQueryResults(datastore.run(query));
+    }
+
+    public Guide get(long id){
+        return toGuide(datastore.get(keyFactory.newKey(id)));
     }
 }
