@@ -105,7 +105,7 @@ No need to provide a body with this method.
 
 #### Response
 
-If the request succeeds, the server responds with an HTTP `200 OK`.
+If the request succeeds, the server responds with an HTTP `201 Created`.
 
 ##### Response Body
 The body of the response contains the guide that was just added.

@@ -26,6 +26,7 @@ public class GuidesServlet extends HttpServlet{
         response.getWriter().print(gson.toJson(helper.queryAll()));
     }
 
+    @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException{
         String title = Jsoup.clean(request.getParameter("title"), Whitelist.none());
         String description = Jsoup.clean(request.getParameter("description"), Whitelist.none());
@@ -34,6 +35,7 @@ public class GuidesServlet extends HttpServlet{
         Guide guide = new Guide(title, description, content);
         guide = helper.put(guide);
 
+        response.setStatus(201);
         response.setContentType("application/json");
         response.getWriter().print(gson.toJson(guide));
     }

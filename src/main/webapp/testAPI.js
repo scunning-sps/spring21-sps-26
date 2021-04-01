@@ -3,7 +3,7 @@ async function postGuide({ title, description, content }){
         method: 'POST'
     });
 
-    if(response.status != 200){
+    if(response.status != 201){
         throw Error('Something went wrong with the request.');
     }
 
