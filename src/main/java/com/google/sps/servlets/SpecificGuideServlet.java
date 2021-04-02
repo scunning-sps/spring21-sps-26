@@ -18,25 +18,29 @@ public class SpecificGuideServlet extends HttpServlet{
     static final long serialVersionUID = 0;
     private final DatastoreGuides helper = new DatastoreGuides();
     private final Gson gson = new Gson();
+    private long id;
 
-    private long getIdFromPath(String path){
+    private Optional<Error> getIdFromPath(String path){
         String[] parts = path.split("/");
-        return Long.parseLong(parts[1]);
+        try{
+            id = Long.parseLong(parts[1]);
+        }catch(RuntimeException exception){
+            return Optional.of(new Error("Guide id must be a number", 400));
+        }
+        return Optional.empty();
     }
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException{
         response.setContentType("application/json");
 
-        long id;
-        try{
-            id = getIdFromPath(request.getPathInfo());
-        }catch(NumberFormatException exception){
+        Optional<Error> error = getIdFromPath(request.getPathInfo());
+        if(error.isPresent()){
             response.setStatus(400);
-            response.getWriter().print(gson.toJson(new Error("Guide id must be a number", 400)));
+            response.getWriter().print(gson.toJson(error.get()));
             return;
         }
-
+            
         Optional<Guide> guide = helper.get(id);
         
         if(!guide.isPresent()){
