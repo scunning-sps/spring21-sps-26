@@ -1,6 +1,7 @@
 package com.google.sps.servlets;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,15 +37,15 @@ public class SpecificGuideServlet extends HttpServlet{
             return;
         }
 
-        Guide guide = helper.get(id);
-
-        if(guide == null){
+        Optional<Guide> guide = helper.get(id);
+        
+        if(!guide.isPresent()){
             response.setStatus(404);
             response.getWriter().print(gson.toJson(new Error("A guide with the specified id does not exist.", 404)));
             return;
         }
 
-        response.getWriter().println(gson.toJson(guide));
+        response.getWriter().println(gson.toJson(guide.get()));
 
     }
 }

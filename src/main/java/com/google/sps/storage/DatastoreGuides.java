@@ -2,6 +2,7 @@ package com.google.sps.storage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import com.google.cloud.datastore.Datastore;
 import com.google.cloud.datastore.DatastoreOptions;
@@ -35,8 +36,6 @@ public class DatastoreGuides {
     }
 
     private Guide toGuide(Entity entity){
-        if (entity == null) return null;
-        
         long id = entity.getKey().getId();
         String title = entity.getString("title");
         String description = entity.getString("description");
@@ -64,7 +63,12 @@ public class DatastoreGuides {
         return listFromQueryResults(datastore.run(query));
     }
 
-    public Guide get(long id){
-        return toGuide(datastore.get(keyFactory.newKey(id)));
+    public Optional<Guide> get(long id){
+        Entity entity = datastore.get(keyFactory.newKey(id));
+        if(entity == null){
+            return Optional.empty();
+        }
+
+        return Optional.of(toGuide(entity));
     }
 }
