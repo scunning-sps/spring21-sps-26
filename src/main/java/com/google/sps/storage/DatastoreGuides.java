@@ -65,10 +65,6 @@ public class DatastoreGuides {
 
     public Optional<Guide> get(long id){
         Entity entity = datastore.get(keyFactory.newKey(id));
-        if(entity == null){
-            return Optional.empty();
-        }
-
-        return Optional.of(toGuide(entity));
+        return Optional.ofNullable(entity).map(this::toGuide);
     }
 }
