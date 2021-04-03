@@ -12,6 +12,7 @@ import com.google.cloud.datastore.IncompleteKey;
 import com.google.cloud.datastore.KeyFactory;
 import com.google.cloud.datastore.Query;
 import com.google.cloud.datastore.QueryResults;
+import com.google.cloud.datastore.StringValue;
 import com.google.sps.data.Guide;
 
 public class DatastoreGuides {
@@ -27,10 +28,11 @@ public class DatastoreGuides {
         else
             key = keyFactory.newKey(guide.getId());
 
+        StringValue content = StringValue.newBuilder(guide.getContent()).setExcludeFromIndexes(true).build();
         return Entity.newBuilder(key)
                 .set("title", guide.getTitle())
                 .set("description", guide.getDescription())
-                .set("content", guide.getContent())
+                .set("content", content)
                 .set("timestamp", guide.getTimestamp())
                 .build();
     }
