@@ -1,4 +1,10 @@
-ody {
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
   background-color: #eff8e2;
   position: relative;
   background: transparent;
@@ -37,16 +43,122 @@ body::before {
   color: #fff !important;
 }
 
-.mr-auto, .mx-auto {
-  margin-right: 0 !important;
-}
-
-.navbar-collapse {
-  display: flex !important;
-  justify-content: flex-end;
-}
-
 .btn-outline-success {
   color: #fff !important;
   border-color: transparent !important;
+}
+
+section {
+    padding: 20px;
+    width: 1280px;
+    margin: 40px auto;
+}
+
+section ul {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+section ul li {
+    list-style: none;
+    background-color: #a3a3a3;
+    padding: 8px 20px;
+    margin: 5px;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+
+.categories {
+    margin-top: 20px;
+}
+
+.categories .container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.categories .container .categories-nav {
+    display: flex !important;
+    flex-direction: column;
+    height: auto;
+    flex-wrap: wrap;
+}
+
+.categories .container .categories-nav .categories-nav-container {
+    display: flex;
+    justify-content: center;
+}
+
+.categories-nav-container ul {
+    margin: 0 auto 15px auto;
+    list-style: none;
+    text-align: center;
+    border-radius: 50px;
+    padding: 2px 15px;
+}
+
+.categories-nav-container ul li {
+    cursor: pointer;
+    display: inline-block;
+    padding: 8px 16px 10px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1;
+    text-transform: uppercase;
+    background: rgba(255, 255, 255, 0.1);
+    margin: 0 3px 10px 3px;
+    transition: all 0.3s ease-in-out;
+    border-radius: 4px;
+}
+
+.categories-nav-container #filter1:hover,
+.categories-nav-container #filter1.active {
+  background: red;
+}
+
+.categories-nav-container #filter2:hover,
+.categories-nav-container #filter2.active {
+  background: green;
+}
+
+.categories-nav-container #filter3:hover,
+.categories-nav-container #filter3.active {
+  background: orange;
+}
+
+.categories-nav-container #filter4:hover,
+.categories-nav-container #filter4.active {
+  background: purple;
+}
+
+.categories-nav-container li:hover,
+.categories-nav-container li.active {
+  background: #00aeff;
+}
+
+.product {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+}
+
+.product > div {
+    margin: auto;
+}
+
+.product .itemBox {
+    position: relative;
+    margin: 5px;
+}
+
+.product .itemBox .card {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
