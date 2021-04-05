@@ -7,16 +7,12 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <link href="img/temp-icon.png" rel="icon">
-
     <link rel="stylesheet" href="style.css">
     <script src="testAPI.js"></script>
-    <script src="script.js"></script>
 
 </head>
 
 <body>
-
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">GuideTech</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
@@ -40,10 +36,71 @@
         </div>
     </nav>
 
+    <!-- Categories -->
+    <section class="categories">
+        <div class="container">
+            <div class="categories-nav">
+                <div class="categories-nav-container">
+                    <ul>
+                        <li id="filter-all" class="list active" data-filter="all">All Guides</li>
+                        <li id="filter1" class="list" data-filter="item1">Front-End</li>
+                        <li id="filter2" class="list" data-filter="item2">Back-End</li>
+                        <li id="filter3" class="list" data-filter="item3">Mobile-Dev</li>
+                        <li id="filter4" class="list" data-filter="item4">Web-Dev</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="product">
+                <div class="card w-75 itemBox item1">
+                    <div class="card-header">
+                        Intro to Python
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <a href="#" class="btn btn-primary">Button</a>
+                    </div>
+                </div>
+
+                <div class="card w-75 itemBox item2">
+                    <div class="card-header">
+                        The JavaScript Bundle
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <a href="#" class="btn btn-primary">Button</a>
+                    </div>
+                </div>
+
+                <div class="card w-75 itemBox item3">
+                    <div class="card-header">
+                        C++
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <a href="#" class="btn btn-primary">Button</a>
+                    </div>
+                </div>
+
+                <div class="card w-75 itemBox item4">
+                    <div class="card-header">
+                        Intro to Python
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <a href="#" class="btn btn-primary">Button</a>
+                    </div>
+                </div>
+            </div>
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
     <!-- Script to run Bootstrap Javascript Components -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
@@ -51,7 +108,7 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
 
-    <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-</body>
+    <script src="script.js"></script>
 
+</body>
 </html>
