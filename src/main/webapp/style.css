@@ -1,9 +1,52 @@
-#content {
-  margin-left: auto;
-  margin-right: auto;
-  width: 650px;
+ody {
+  background-color: #eff8e2;
+  position: relative;
+  background: transparent;
 }
 
-#greeting-container {
-  margin-top: 20px;
+body::before {
+  content: "";
+  position: fixed;
+  background-color: #fff;
+  background-size: cover;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 100vh;
+  z-index: -1;
+}
+
+@media (min-width: 1024px) {
+  body::before {
+    background-attachment: fixed;
+  }
+}
+
+.navbar {
+  background-color: #00993b !important;
+  border-bottom-left-radius: 10px !important;
+  border-bottom-right-radius: 10px !important;
+  padding: 20px 30px;
+}
+
+.navbar-light .navbar-brand {
+  color: #fff !important;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: #fff !important;
+}
+
+.mr-auto, .mx-auto {
+  margin-right: 0 !important;
+}
+
+.navbar-collapse {
+  display: flex !important;
+  justify-content: flex-end;
+}
+
+.btn-outline-success {
+  color: #fff !important;
+  border-color: transparent !important;
 }
