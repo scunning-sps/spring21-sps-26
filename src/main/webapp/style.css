@@ -50,7 +50,6 @@ body::before {
 
 section {
     padding: 20px;
-    width: 1280px;
     margin: 40px auto;
 }
 
@@ -139,23 +138,23 @@ section ul li {
   background: #00aeff;
 }
 
-.product {
+#product {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
     align-items: center;
 }
 
-.product > div {
+#product > div {
     margin: auto;
 }
 
-.product .itemBox {
+#product .itemBox {
     position: relative;
     margin: 5px;
 }
 
-.product .itemBox .card {
+#product .itemBox .card {
     position: absolute;
     top: 0;
     left: 0;
