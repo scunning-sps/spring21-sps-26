@@ -12,19 +12,50 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-$(document).ready(function() {
-    $('.list').click(function() {
-      const value = $(this).attr('data-filter');
-      if (value == 'all') {
-        $('.itemBox').show('1000');
-      }
-      else {
-        $('.itemBox').not('.'+value).hide('1000');
-        $('.itemBox').filter('.' + value).show('1000');
-      }
+$(document).ready(function () {
+    $('.list').click(function () {
+        const value = $(this).attr('data-filter');
+        if (value == 'all') {
+            $('.itemBox').show('1000');
+        }
+        else {
+            $('.itemBox').not('.' + value).hide('1000');
+            $('.itemBox').filter('.' + value).show('1000');
+        }
     })
-  
-    $('.list').click(function() {
-      $(this).addClass('active').siblings().removeClass('active');
+
+    $('.list').click(function () {
+        $(this).addClass('active').siblings().removeClass('active');
     })
 })
+
+async function getGuide() {
+    const responseFromServer = await fetch('/guides');
+    const jsonResponse = await responseFromServer.json();
+    const guides_container = document.getElementById($('#product'));
+
+    for (let i = 0; i < jsonResponse.length; i++) {
+        $('#product').append(guidesToHTML(jsonResponse[i]));
+    }
+}
+
+function guidesToHTML(guide) {
+    let id = guide.id;
+    let title = guide.title;
+    let description = guide.description;
+    let timestamp = guide.timestamp; // Returns in ms
+    let date = new Date(timestamp); // Convert to date
+
+    return `<div class="card w-75 itemBox item1">
+        <div class="card-header">${id}</div>
+        <div class="card-body">
+            <h5 class="card-title">${title}</h5>
+            <p class="card-text">${description}</p>
+            <footer class="blockquote-footer">
+                <small class="text-muted">
+                Last updated <cite title="Source Title">${date.toDateString()}</cite>
+                </small>
+            </footer>
+        </div>
+    </div>`;
+}
