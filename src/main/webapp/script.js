@@ -28,3 +28,12 @@ $(document).ready(function() {
       $(this).addClass('active').siblings().removeClass('active');
     })
 })
+
+function auto_grow(element) {
+    element.style.height = "5px";
+    element.style.height = (element.scrollHeight)+"px";
+}
+
+function submitAlert() {
+  alert("Your form has been submited!");
+}
