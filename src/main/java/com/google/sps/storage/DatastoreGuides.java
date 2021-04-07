@@ -13,13 +13,20 @@ import com.google.cloud.datastore.KeyFactory;
 import com.google.cloud.datastore.Query;
 import com.google.cloud.datastore.QueryResults;
 import com.google.cloud.datastore.StringValue;
+import com.google.cloud.datastore.StructuredQuery;
+import com.google.cloud.datastore.StructuredQuery.PropertyFilter;
 import com.google.sps.data.Guide;
 
 public class DatastoreGuides {
 
     private final Datastore datastore = DatastoreOptions.getDefaultInstance().getService();
     private final KeyFactory keyFactory = datastore.newKeyFactory().setKind("Guide");
-    private final Query<Entity> query = Query.newEntityQueryBuilder().setKind("Guide").build();
+    private final StructuredQuery.Builder<Entity> queryBuilder = Query.newEntityQueryBuilder().setKind("Guide");
+    private final Query<Entity> queryAll;
+
+    public DatastoreGuides(){
+        queryAll = queryBuilder.build();
+    }
 
     private FullEntity<IncompleteKey> toEntity(Guide guide){
         IncompleteKey key;
@@ -33,6 +40,7 @@ public class DatastoreGuides {
                 .set("title", guide.getTitle())
                 .set("description", guide.getDescription())
                 .set("content", content)
+                .set("category", guide.getCategory())
                 .set("timestamp", guide.getTimestamp())
                 .build();
     }
@@ -42,9 +50,10 @@ public class DatastoreGuides {
         String title = entity.getString("title");
         String description = entity.getString("description");
         String content = entity.getString("content");
+        String category = entity.getString("category");
         long timestamp = entity.getLong("timestamp");
 
-        return new Guide(id, title, description, content, timestamp);
+        return new Guide(id, title, description, content, category, timestamp);
     }
 
     private List<Guide> listFromQueryResults(QueryResults<Entity> results){
@@ -62,6 +71,11 @@ public class DatastoreGuides {
     }
 
     public List<Guide> queryAll(){
+        return listFromQueryResults(datastore.run(queryAll));
+    }
+
+    public List<Guide> queryByCategory(String category){
+        Query<Entity> query = queryBuilder.setFilter(PropertyFilter.eq("category", category)).build();
         return listFromQueryResults(datastore.run(query));
     }
 
