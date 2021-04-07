@@ -8,11 +8,10 @@
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <link rel="stylesheet" href="style.css">
-    <script src="testAPI.js"></script>
 
 </head>
 
-<body>
+<body onload="getGuide()">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">GuideTech</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
@@ -50,51 +49,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="product">
-                <div class="card w-75 itemBox item1">
-                    <div class="card-header">
-                        Intro to Python
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        <a href="#" class="btn btn-primary">Button</a>
-                    </div>
-                </div>
-
-                <div class="card w-75 itemBox item2">
-                    <div class="card-header">
-                        The JavaScript Bundle
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        <a href="#" class="btn btn-primary">Button</a>
-                    </div>
-                </div>
-
-                <div class="card w-75 itemBox item3">
-                    <div class="card-header">
-                        C++
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        <a href="#" class="btn btn-primary">Button</a>
-                    </div>
-                </div>
-
-                <div class="card w-75 itemBox item4">
-                    <div class="card-header">
-                        Intro to Python
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        <a href="#" class="btn btn-primary">Button</a>
-                    </div>
-                </div>
-            </div>
+            <div id="product" class="product-container"></div>
     </section>
 
     <script src="https://code.jquery.com/jquery-3.6.0.js"
@@ -109,6 +64,7 @@
         crossorigin="anonymous"></script>
 
     <script src="script.js"></script>
-
+    <script src="testAPI.js"></script>
 </body>
+
 </html>
