@@ -1,5 +1,5 @@
-async function postGuide({ title, description, content }){
-    let response = await fetch(`/guides?title=${ title }&description=${ description }&content=${ content }` , {
+async function postGuide({ title, description, content, category }){
+    let response = await fetch(`/guides?title=${ title }&description=${ description }&content=${ content }&category=${ category }` , {
         method: 'POST'
     });
 
@@ -12,6 +12,8 @@ async function postGuide({ title, description, content }){
 }
 
 function testPostGuides(){
+    const categories = ['math', 'tech', 'arts'];
+
     for(let i = 1; i < 11;i++){
         postGuide({
             title: `Lorem ipsum dolor sit amet ${ i }`,
@@ -63,6 +65,7 @@ function testPostGuides(){
             Proin posuere sem et lorem eleifend, non consectetur sem suscipit. Nam venenatis leo diam, 
             quis ornare dolor euismod a. Nam sem enim, dignissim sed ullamcorper et, elementum semper 
             nisl. Proin lobortis tortor tellus, vitae placerat nulla cursus non.`,
+            category: categories[i % categories.length],
         });
     }
 }
