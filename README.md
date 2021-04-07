@@ -28,7 +28,14 @@ Retrieves a list of guides.
 | `GET` | `/guides` |
 
 ##### Parameters
-There are not any parameters for this method at the moment.
+| Parameter | Value |
+| --- | --- |
+| category | string |
+
+| Parameter Name | Value | Description |
+| --- | --- | --- |
+| **Optional parameters** |
+| category | string | Filters the response by this category. |
 
 ##### Request Body
 No need to provide a body with this method.
@@ -38,7 +45,7 @@ No need to provide a body with this method.
 If the request succeeds, the server responds with an HTTP `200 OK`.
 
 ##### Response Body
-The body of the response contains a list with the existing guides.
+The body of the response contains a list with the existing guides. If the `category` parameter is set, the list only includes guides from the specified category.
 ```JSON
 [
     {
@@ -46,7 +53,8 @@ The body of the response contains a list with the existing guides.
         "timestamp": number,
         "title": string,
         "description": string, 
-        "content": string
+        "content": string,
+        "category": string
     },
     ...
 ]
@@ -70,6 +78,7 @@ Adds a guide.
 | title | string | Title of the new guide. |
 | description | string | Description of the new guide. |
 | content | string | Content of the new guide. |
+| category | string | Category of the new guide. |
 
 ##### Request Body
 No need to provide a body with this method.
@@ -86,7 +95,8 @@ The body of the response contains the guide that was just added.
     "timestamp": number,
     "title": string,
     "description": string, 
-    "content": string
+    "content": string,
+    "category": string
 }
 ```
 
@@ -119,6 +129,7 @@ The body of the response contains the guide requested.
     "timestamp": number,
     "title": string,
     "description": string, 
-    "content": string
+    "content": string,
+    "category": string
 }
 ```
