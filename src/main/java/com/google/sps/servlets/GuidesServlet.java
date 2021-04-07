@@ -23,7 +23,15 @@ public class GuidesServlet extends HttpServlet{
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException{
         response.setContentType("application/json");
-        response.getWriter().print(gson.toJson(helper.queryAll()));
+        String category = request.getParameter("category");
+
+        if(category == null){
+            response.getWriter().print(gson.toJson(helper.queryAll()));
+            return;
+        }
+        
+        category = Jsoup.clean(category, Whitelist.none());
+        response.getWriter().print(gson.toJson(helper.queryByCategory(category)));
     }
 
     @Override
