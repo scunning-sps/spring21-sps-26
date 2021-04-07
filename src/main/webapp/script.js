@@ -40,20 +40,14 @@ async function getGuide() {
 }
 
 function guidesToHTML(guide) {
-    let id = guide.id;
-    let title = guide.title;
-    let description = guide.description;
-    let timestamp = guide.timestamp; // Returns in ms
-    let date = new Date(timestamp); // Convert to date
-
     return `<div class="card w-75 itemBox item1">
-        <div class="card-header">${id}</div>
+        <div class="card-header">${guide.id}</div>
         <div class="card-body">
-            <h5 class="card-title">${title}</h5>
-            <p class="card-text">${description}</p>
+            <h5 class="card-title">${guide.title}</h5>
+            <p class="card-text">${guide.description}</p>
             <footer class="blockquote-footer">
                 <small class="text-muted">
-                Last updated <cite title="Source Title">${date.toDateString()}</cite>
+                Last updated <cite title="Source Title">${new Date(guide.timestamp).toDateString()}</cite>
                 </small>
             </footer>
         </div>
