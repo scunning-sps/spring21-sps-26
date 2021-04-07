@@ -13,13 +13,20 @@ import com.google.cloud.datastore.KeyFactory;
 import com.google.cloud.datastore.Query;
 import com.google.cloud.datastore.QueryResults;
 import com.google.cloud.datastore.StringValue;
+import com.google.cloud.datastore.StructuredQuery;
+import com.google.cloud.datastore.StructuredQuery.PropertyFilter;
 import com.google.sps.data.Guide;
 
 public class DatastoreGuides {
 
     private final Datastore datastore = DatastoreOptions.getDefaultInstance().getService();
     private final KeyFactory keyFactory = datastore.newKeyFactory().setKind("Guide");
-    private final Query<Entity> query = Query.newEntityQueryBuilder().setKind("Guide").build();
+    private final StructuredQuery.Builder<Entity> queryBuilder = Query.newEntityQueryBuilder().setKind("Guide");
+    private final Query<Entity> queryAll;
+
+    public DatastoreGuides(){
+        queryAll = queryBuilder.build();
+    }
 
     private FullEntity<IncompleteKey> toEntity(Guide guide){
         IncompleteKey key;
@@ -64,6 +71,11 @@ public class DatastoreGuides {
     }
 
     public List<Guide> queryAll(){
+        return listFromQueryResults(datastore.run(queryAll));
+    }
+
+    public List<Guide> queryByCategory(String category){
+        Query<Entity> query = queryBuilder.setFilter(PropertyFilter.eq("category", category)).build();
         return listFromQueryResults(datastore.run(query));
     }
 
