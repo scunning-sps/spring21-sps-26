@@ -33,6 +33,7 @@ public class DatastoreGuides {
                 .set("title", guide.getTitle())
                 .set("description", guide.getDescription())
                 .set("content", content)
+                .set("category", guide.getCategory())
                 .set("timestamp", guide.getTimestamp())
                 .build();
     }
@@ -42,9 +43,10 @@ public class DatastoreGuides {
         String title = entity.getString("title");
         String description = entity.getString("description");
         String content = entity.getString("content");
+        String category = entity.getString("category");
         long timestamp = entity.getLong("timestamp");
 
-        return new Guide(id, title, description, content, timestamp);
+        return new Guide(id, title, description, content, category, timestamp);
     }
 
     private List<Guide> listFromQueryResults(QueryResults<Entity> results){
