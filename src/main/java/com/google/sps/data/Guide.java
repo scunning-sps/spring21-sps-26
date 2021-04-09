@@ -10,19 +10,45 @@ public class Guide {
 
     public Guide(String title, String description, String content, String category){
         this.id = -1;
+
+        if(!validIndexedString(title))
+            throw new IllegalArgumentException("Invalid title");
         this.title = title;
+
+        if(!validIndexedString(description))
+            throw new IllegalArgumentException("Invalid description");
         this.description = description;
+
+        if(!validUnindexedString(content))
+            throw new IllegalArgumentException("Invalid content");
         this.content = content;
+
+        if(!validIndexedString(category))
+            throw new IllegalArgumentException("Invalid category");
         this.category = category;
+
         this.timestamp = System.currentTimeMillis();
     }
 
     public Guide(long id, String title, String description, String content, String category, long timestamp){
         this.id = id;
+
+        if(!validIndexedString(title))
+            throw new IllegalArgumentException("Invalid title");
         this.title = title;
+
+        if(!validIndexedString(description))
+            throw new IllegalArgumentException("Invalid description");
         this.description = description;
+
+        if(!validUnindexedString(content))
+            throw new IllegalArgumentException("Invalid content");
         this.content = content;
+
+        if(!validIndexedString(category))
+            throw new IllegalArgumentException("Invalid category");
         this.category = category;
+
         this.timestamp = timestamp;
     }
 
@@ -48,5 +74,26 @@ public class Guide {
 
     public long getTimestamp() {
         return timestamp;
+    }
+
+    private boolean nullOrEmptyString(String str){
+        if(str == null) return true;
+        if(str.equals("")) return true;
+        return false;
+    }
+
+    private boolean smallerThan1500bytes(String str){
+        if(title.getBytes().length > 1500) return false;
+        return true;
+    }
+
+    private boolean validIndexedString(String str){
+        if(nullOrEmptyString(str) && smallerThan1500bytes(str)) return false;
+        return true;
+    }
+
+    private boolean validUnindexedString(String str){
+        if(nullOrEmptyString(str)) return false;
+        return true;
     }
 }
