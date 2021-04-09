@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.google.sps.data.Error;
 import com.google.sps.data.Guide;
 import com.google.sps.storage.DatastoreGuides;
 
@@ -25,7 +26,7 @@ public class GuidesServlet extends HttpServlet{
         response.setContentType("application/json");
         String category = request.getParameter("category");
 
-        if(category == null){
+        if(category == null || category == ""){
             response.getWriter().print(gson.toJson(helper.queryAll()));
             return;
         }
@@ -36,16 +37,25 @@ public class GuidesServlet extends HttpServlet{
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException{
-        String title = Jsoup.clean(request.getParameter("title"), Whitelist.none());
-        String description = Jsoup.clean(request.getParameter("description"), Whitelist.none());
-        String content = Jsoup.clean(request.getParameter("content"), Whitelist.none());
-        String category = Jsoup.clean(request.getParameter("category"), Whitelist.none());
+        response.setContentType("application/json");
 
-        Guide guide = new Guide(title, description, content, category);
+        String title = request.getParameter("title");
+        String description = request.getParameter("description");
+        String content = request.getParameter("content");
+        String category = request.getParameter("category");
+
+        Guide guide;
+        try{
+            guide = new Guide(title, description, content, category);
+        }catch(RuntimeException exception){
+            response.setStatus(400);
+            response.getWriter().print(gson.toJson(new Error(exception.getMessage(), 400)));
+            return;
+        }
+        
         guide = helper.put(guide);
 
         response.setStatus(201);
-        response.setContentType("application/json");
         response.getWriter().print(gson.toJson(guide));
     }
 }

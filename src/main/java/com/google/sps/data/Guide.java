@@ -1,5 +1,8 @@
 package com.google.sps.data;
 
+import org.jsoup.Jsoup;
+import org.jsoup.safety.Whitelist;
+
 public class Guide {
     private final long id;
     private final String title;
@@ -13,19 +16,19 @@ public class Guide {
 
         if(!validIndexedString(title))
             throw new IllegalArgumentException("Invalid title");
-        this.title = title;
+        this.title = Jsoup.clean(title, Whitelist.none());
 
         if(!validIndexedString(description))
             throw new IllegalArgumentException("Invalid description");
-        this.description = description;
+        this.description = Jsoup.clean(description, Whitelist.none());
 
         if(!validUnindexedString(content))
             throw new IllegalArgumentException("Invalid content");
-        this.content = content;
+        this.content = Jsoup.clean(content, Whitelist.none());
 
         if(!validIndexedString(category))
             throw new IllegalArgumentException("Invalid category");
-        this.category = category;
+        this.category = Jsoup.clean(category, Whitelist.none());
 
         this.timestamp = System.currentTimeMillis();
     }
@@ -35,19 +38,19 @@ public class Guide {
 
         if(!validIndexedString(title))
             throw new IllegalArgumentException("Invalid title");
-        this.title = title;
+        this.title = Jsoup.clean(title, Whitelist.none());
 
         if(!validIndexedString(description))
             throw new IllegalArgumentException("Invalid description");
-        this.description = description;
+        this.description = Jsoup.clean(description, Whitelist.none());
 
         if(!validUnindexedString(content))
             throw new IllegalArgumentException("Invalid content");
-        this.content = content;
+        this.content = Jsoup.clean(content, Whitelist.none());
 
         if(!validIndexedString(category))
             throw new IllegalArgumentException("Invalid category");
-        this.category = category;
+        this.category = Jsoup.clean(category, Whitelist.none());
 
         this.timestamp = timestamp;
     }
