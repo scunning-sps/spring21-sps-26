@@ -7,12 +7,12 @@ async function postGuide({ title, description, content, category }){
         throw Error('Something went wrong with the request.');
     }
 
-    let guide = await response.json();
-    console.log(guide);
+    let guides = await response.json();
+    console.log(guides);
 }
 
 function testPostGuides(){
-    const categories = ['math', 'tech', 'arts'];
+    const categories = ['iOS', 'Android', 'Frontend', 'Backend'];
 
     for(let i = 1; i < 11;i++){
         postGuide({
