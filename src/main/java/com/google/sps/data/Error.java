@@ -1,6 +1,7 @@
 package com.google.sps.data;
 
-public class Error{
+public class Error extends RuntimeException{
+    private static final long serialVersionUID = 1L;
     private final String errorMessage;
     private final int code;
 

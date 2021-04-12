@@ -56,9 +56,11 @@ public class GuidesServlet extends HttpServlet{
 
         Guide guide = new Guide(title, description, content, category);
 
-        if(guide.isInvalid()){
-            response.setStatus(400);
-            response.getWriter().print(gson.toJson(guide.getError()));
+        try{
+            Guide.validate(guide);
+        }catch(Error err){
+            response.setStatus(err.getCode());
+            response.getWriter().print(gson.toJson(err));
             return;
         }
         

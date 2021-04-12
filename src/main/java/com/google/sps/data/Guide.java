@@ -7,7 +7,6 @@ public class Guide {
     private final String content;
     private final String category;
     private final long timestamp;
-    private Error error = null;
 
     public Guide(String title, String description, String content, String category){
         this.id = -1;
@@ -51,53 +50,38 @@ public class Guide {
         return timestamp;
     }
 
-    public Error getError(){
-        return error;
+    private static boolean emptyString(String str){
+        return str.equals("");
     }
 
-    private boolean emptyString(String str){
-        if(str.equals("")) return true;
+    private static boolean moreThan1500bytes(String str){
+        if(str.getBytes().length > 1500) return true;
         return false;
     }
 
-    private boolean moreThan1500bytes(String str){
-        if(title.getBytes().length > 1500) return true;
-        return false;
+    private static void badParameterError(String parameter, String errorMsg){
+        throw new Error("The following parameter " + errorMsg + ": " + parameter, 400);
     }
 
-    public boolean isInvalid(){
-        String errorMsg = "The following parameter cannot be empty: ";
-        String parameter = null;
+    public static void validate(Guide guide){
+        String errorMsg = "cannot be empty";
 
-        if(emptyString(title))
-            parameter = "title";
-        else if(emptyString(description))
-            parameter = "description";
-        else if(emptyString(content))
-            parameter = "content";
-        else if(emptyString(category))
-            parameter = "category";
+        if(emptyString(guide.title))
+            badParameterError("title", errorMsg);
+        else if(emptyString(guide.description))
+            badParameterError("description", errorMsg);
+        else if(emptyString(guide.content))
+            badParameterError("content", errorMsg);
+        else if(emptyString(guide.category))
+            badParameterError("category", errorMsg);
 
-        if(parameter != null){
-            this.error = new Error(errorMsg + parameter, 400);
-            return true;
-        }
+        errorMsg = "cannot be more than 1500 bytes";
 
-        errorMsg = "The following parameter cannot be more than 1500 bytes: ";
-
-        if(moreThan1500bytes(title))
-            parameter = "title";
-        else if(moreThan1500bytes(description))
-            parameter = "description";
-        else if(moreThan1500bytes(category))
-            parameter = "category";
-
-        if(parameter != null){
-            this.error = new Error(errorMsg + parameter, 400);
-            return true;
-        }
-
-
-        return false;
+        if(moreThan1500bytes(guide.title))
+            badParameterError("title", errorMsg);
+        else if(moreThan1500bytes(guide.description))
+            badParameterError("description", errorMsg);
+        else if(moreThan1500bytes(guide.category))
+            badParameterError("category", errorMsg);
     }
 }
