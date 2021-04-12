@@ -26,7 +26,7 @@ public class GuidesServlet extends HttpServlet{
         response.setContentType("application/json");
         String category = request.getParameter("category");
 
-        if(category == null || category == ""){
+        if(category == null || category.equals("")){
             response.getWriter().print(gson.toJson(helper.queryAll()));
             return;
         }
