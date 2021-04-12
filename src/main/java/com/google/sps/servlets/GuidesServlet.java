@@ -44,12 +44,21 @@ public class GuidesServlet extends HttpServlet{
         String content = request.getParameter("content");
         String category = request.getParameter("category");
 
-        Guide guide;
-        try{
-            guide = new Guide(title, description, content, category);
-        }catch(RuntimeException exception){
+        if(title == null || description == null || content == null || category == null){
             response.setStatus(400);
-            response.getWriter().print(gson.toJson(new Error(exception.getMessage(), 400)));
+            response.getWriter().print(gson.toJson(new Error("Missing one of the required parameters.", 400)));
+        }
+
+        title = Jsoup.clean(title, Whitelist.none());
+        description = Jsoup.clean(description, Whitelist.none());
+        content = Jsoup.clean(content, Whitelist.none());
+        category = Jsoup.clean(category, Whitelist.none());
+
+        Guide guide = new Guide(title, description, content, category);
+
+        if(guide.isInvalid()){
+            response.setStatus(400);
+            response.getWriter().print(gson.toJson(guide.getError()));
             return;
         }
         
