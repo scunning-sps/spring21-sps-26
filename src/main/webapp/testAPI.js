@@ -9,7 +9,7 @@ async function postGuide({ title, description, content, category }){
 }
 
 function testPostGuides(){
-    const categories = ['math', 'tech', 'arts'];
+    const categories = ['iOS', 'Android', 'Frontend', 'Backend'];
 
     for(let i = 1; i < 11;i++){
         postGuide({

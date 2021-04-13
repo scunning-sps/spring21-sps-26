@@ -49,4 +49,39 @@ public class Guide {
     public long getTimestamp() {
         return timestamp;
     }
+
+    private static boolean emptyString(String str){
+        return str.equals("");
+    }
+
+    private static boolean moreThan1500bytes(String str){
+        if(str.getBytes().length > 1500) return true;
+        return false;
+    }
+
+    private static void badParameterError(String parameter, String errorMsg){
+        throw new Error("The following parameter " + errorMsg + ": " + parameter, 400);
+    }
+
+    public static void validate(Guide guide){
+        String errorMsg = "cannot be empty";
+
+        if(emptyString(guide.title))
+            badParameterError("title", errorMsg);
+        else if(emptyString(guide.description))
+            badParameterError("description", errorMsg);
+        else if(emptyString(guide.content))
+            badParameterError("content", errorMsg);
+        else if(emptyString(guide.category))
+            badParameterError("category", errorMsg);
+
+        errorMsg = "cannot be more than 1500 bytes";
+
+        if(moreThan1500bytes(guide.title))
+            badParameterError("title", errorMsg);
+        else if(moreThan1500bytes(guide.description))
+            badParameterError("description", errorMsg);
+        else if(moreThan1500bytes(guide.category))
+            badParameterError("category", errorMsg);
+    }
 }
