@@ -68,5 +68,6 @@ public class GuidesServlet extends HttpServlet{
 
         response.setStatus(201);
         response.getWriter().print(gson.toJson(guide));
+        response.sendRedirect("/");
     }
 }

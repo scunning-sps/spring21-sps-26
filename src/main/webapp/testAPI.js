@@ -3,12 +3,9 @@ async function postGuide({ title, description, content, category }){
         method: 'POST'
     });
 
-    if(response.status != 201){
+    if(response.status != 200){
         throw Error('Something went wrong with the request.');
     }
-
-    let guides = await response.json();
-    console.log(guides);
 }
 
 function testPostGuides(){
