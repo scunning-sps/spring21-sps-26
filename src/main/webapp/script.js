@@ -29,6 +29,15 @@ $(document).ready(function () {
     })
 })
 
+function auto_grow(element) {
+    element.style.height = "5px";
+    element.style.height = (element.scrollHeight)+"px";
+}
+
+function submitAlert() {
+  alert("Your form has been submited!");
+}
+
 async function getGuide() {
     const responseFromServer = await fetch('/guides');
     const jsonResponse = await responseFromServer.json();
