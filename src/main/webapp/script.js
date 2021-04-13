@@ -49,7 +49,7 @@ async function getGuide() {
 }
 
 function guidesToHTML(guide) {
-    return `<div class="card w-75 itemBox item1">
+    return `<div class="card w-75 itemBox backend">
         <div class="card-header">${guide.id}</div>
         <div class="card-body">
             <h5 class="card-title">${guide.title}</h5>
