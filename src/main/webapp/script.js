@@ -41,7 +41,6 @@ function submitAlert() {
 async function getGuide() {
     const responseFromServer = await fetch('/guides');
     const jsonResponse = await responseFromServer.json();
-    const guides_container = document.getElementById($('#product'));
 
     for (let i = 0; i < jsonResponse.length; i++) {
         $('#product').append(guidesToHTML(jsonResponse[i]));
@@ -49,11 +48,50 @@ async function getGuide() {
 }
 
 function guidesToHTML(guide) {
+    console.log("guide.id:" + guide.id);
     return `<div class="card w-75 itemBox ${guide.category}">
+        <div class="card-header">${guide.id}</div>
+        <a href="guide.html?id=${guide.id}">
+            <div class="card-body">
+                <h5 class="card-title">${guide.title}</h5>
+                <p class="card-text">${guide.description}</p>
+                <footer class="blockquote-footer">
+                    <small class="text-muted">
+                    Last updated <cite title="Source Title">${new Date(guide.timestamp).toDateString()}</cite>
+                    </small>
+                </footer>
+            </div>
+        </a>
+    </div>`;
+}
+
+function getGuideId() {
+    let urlString  = window.location.href;
+    var url = new URL(urlString);
+    var id = url.searchParams.get("id");
+    console.log(id);
+    return id;
+}
+
+function onLoadGuide() {
+    addGuidePage(getGuideId());
+}
+
+async function addGuidePage(id) {
+    const guideName = "/guides/" + id;
+    console.log("guide Name = " + guideName);
+    const responseFromServer = await fetch(guideName);
+    const jsonResponse = await responseFromServer.json();
+
+    $('#guide-page').append(addGuidesToHTML(jsonResponse));
+}
+
+function addGuidesToHTML(guide) {
+    return `<div class="card w-75 itemBox ${guide.category} ">
         <div class="card-header">${guide.id}</div>
         <div class="card-body">
             <h5 class="card-title">${guide.title}</h5>
-            <p class="card-text">${guide.description}</p>
+            <p class="card-text">${guide.content}</p>
             <footer class="blockquote-footer">
                 <small class="text-muted">
                 Last updated <cite title="Source Title">${new Date(guide.timestamp).toDateString()}</cite>
