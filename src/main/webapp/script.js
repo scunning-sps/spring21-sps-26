@@ -41,7 +41,6 @@ function submitAlert() {
 async function getGuide() {
     const responseFromServer = await fetch('/guides');
     const jsonResponse = await responseFromServer.json();
-    const guides_container = document.getElementById($('#product'));
 
     for (let i = 0; i < jsonResponse.length; i++) {
         $('#product').append(guidesToHTML(jsonResponse[i]));
@@ -50,6 +49,54 @@ async function getGuide() {
 
 function guidesToHTML(guide) {
     return `<div id="guide-${guide.id}" class="card w-75 itemBox ${guide.category}">
+        <div class="card-header">${guide.id}</div>
+        <a href="guide.html?id=${guide.id}">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-10">
+                        <h5 class="card-title">${guide.title}</h5>
+                        <p class="card-text">${guide.description}</p>
+                        <footer class="blockquote-footer">
+                            <small class="text-muted">
+                            Last updated <cite title="Source Title">${new Date(guide.timestamp).toDateString()}</cite>
+                            </small>
+                        </footer>
+                    </div>
+                    <div class="col-2 d-flex justify-content-end align-items-start">
+                        <button class="btn btn-danger" onclick="confirmDelete(${ guide.id })">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>`;
+}
+
+function getGuideId() {
+    let urlString  = window.location.href;
+    var url = new URL(urlString);
+    var id = url.searchParams.get("id");
+    console.log(id);
+    return id;
+}
+
+function onLoadGuide() {
+    addGuidePage(getGuideId());
+}
+
+async function addGuidePage(id) {
+    const guideName = "/guides/" + id;
+    const responseFromServer = await fetch(guideName);
+    const jsonResponse = await responseFromServer.json();
+
+    $('#guide-page').append(addGuidesToHTML(jsonResponse));
+}
+
+function addGuidesToHTML(guide) {
+    return `<div class="card w-75 itemBox ${guide.category} ">
         <div class="card-header">${guide.id}</div>
         <div class="card-body">
             <div class="row">
