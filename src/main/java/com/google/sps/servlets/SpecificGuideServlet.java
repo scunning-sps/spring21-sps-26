@@ -60,13 +60,7 @@ public class SpecificGuideServlet extends HttpServlet{
             return;
         }
 
-        try{
-            helper.delete(id);
-        }catch(RuntimeException exception){
-            response.setStatus(404);
-            response.getWriter().print(gson.toJson(new Error("A guide with the specified id does not exist.", 404)));
-            return;
-        }
+        helper.delete(id);
 
         response.setStatus(200);
     }

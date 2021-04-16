@@ -14,7 +14,7 @@ async function deleteGuide(id){
     });
 
     if(response.status != 200){
-        throw Error('Something with wrong with the delete.');
+        throw Error('Something went wrong with the delete.');
     }
 }
 
