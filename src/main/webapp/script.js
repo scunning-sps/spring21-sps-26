@@ -79,7 +79,6 @@ function onLoadGuide() {
 
 async function addGuidePage(id) {
     const guideName = "/guides/" + id;
-    console.log("guide Name = " + guideName);
     const responseFromServer = await fetch(guideName);
     const jsonResponse = await responseFromServer.json();
 
