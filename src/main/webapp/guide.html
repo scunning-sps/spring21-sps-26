@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>GuideTech</title>
+    <title>Upload to GuideTech</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
@@ -11,7 +11,7 @@
 
 </head>
 
-<body onload="getGuide()">
+<body onload="onLoadGuide()">
     <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="index.html">GuideTech</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
@@ -35,23 +35,24 @@
         </div>
     </nav>
 
-    <!-- Categories -->
-    <section class="categories">
-        <div class="container">
-            <div class="categories-nav">
-                <div class="categories-nav-container">
-                    <ul>
-                        <li id="filter-all" class="list active" data-filter="all">All Guides</li>
-                        <li id="filter1" class="list" data-filter="iOS">iOS</li>
-                        <li id="filter2" class="list" data-filter="Android">Android</li>
-                        <li id="filter3" class="list" data-filter="Frontend">Frontend</li>
-                        <li id="filter4" class="list" data-filter="Backend">Backend</li>
-                        <li id="addGuide"><a href="form.html">Add Guide +</a></li>
-                    </ul>
+    <div class="guide-content">
+        <nav class="side-nav">
+            <ul>
+                <li><a href="index.html"><img class="left-arrow" src="./img/left-arrow.png"> Go Back</a></li>
+                <li><a href="#">Trending</a></li>
+                <li  class="add-link"><a href="#">Newly Added</a></li>
+                <li id="addGuide" class="add-link"><a href="form.html">Add Guide +</a></li>
+            </ul>
+        </nav>
+        <div class="content">
+            <!-- Categories -->
+            <div class="guide">
+                <div class="container">
+                    <div id="guide-page" class="guide-container"></div>
                 </div>
             </div>
-            <div id="product" class="product-container"></div>
-    </section>
+        </div>
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.js"
         integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
@@ -66,6 +67,6 @@
 
     <script src="script.js"></script>
     <script src="testAPI.js"></script>
-</body>
+    </body>
 
 </html>
