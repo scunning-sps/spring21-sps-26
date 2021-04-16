@@ -70,6 +70,10 @@ public class DatastoreGuides {
         return toGuide(datastore.put(toEntity(guide)));
     }
 
+    public void delete(long id){
+        datastore.delete(keyFactory.newKey(id));
+    }
+
     public List<Guide> queryAll(){
         return listFromQueryResults(datastore.run(queryAll));
     }

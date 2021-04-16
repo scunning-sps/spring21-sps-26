@@ -8,6 +8,23 @@ async function postGuide({ title, description, content, category }){
     }
 }
 
+async function deleteGuide(id){
+    let response = await fetch(`/guides/${ id }`, {
+        method: 'DELETE'
+    });
+
+    if(response.status != 200){
+        throw Error('Something went wrong with the delete.');
+    }
+}
+
+function confirmDelete(id){
+    if(confirm("Are you sure you want to delete this? This action is permanent.")){
+        deleteGuide(id);
+        document.getElementById(`guide-${ id }`).remove();
+    };
+}
+
 function testPostGuides(){
     const categories = ['iOS', 'Android', 'Frontend', 'Backend'];
 

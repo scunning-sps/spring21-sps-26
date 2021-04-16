@@ -47,6 +47,7 @@ public class GuidesServlet extends HttpServlet{
         if(title == null || description == null || content == null || category == null){
             response.setStatus(400);
             response.getWriter().print(gson.toJson(new Error("Missing one of the required parameters.", 400)));
+            return;
         }
 
         title = Jsoup.clean(title, Whitelist.none());

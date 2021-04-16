@@ -51,19 +51,23 @@
         <br>
 
         <label for="guideLinks">Links</label> 
-        <textarea onkeyup="auto_grow(this)" name= "content" id="guideDescription"></textarea>
+        <textarea onkeyup="auto_grow(this)" name= "content" id="guideContent"></textarea>
+        <br>
+
+        <label for="guideLinks">Category</label> 
+        <textarea onkeyup="auto_grow(this)" name= "category" id="guideCategory"></textarea>
         <br>
 
         
-        <label for="cars">Choose a category:</label>
+        <!--<label for="cars">Choose a category:</label>
             <select name="categories" id="categories">
-                <option value="iOS">iOS</option>
+                <option selected="selected" value="iOS">iOS</option>
                 <option value="Android">Android</option>
                 <option value="Frontend">Frontend</option>
                 <option value="Backend">Backend</option>
             </select>
-        <br>
-        <button type="submit">Submit</button>
+        <br>-->
+        <button onclick="createGuide()">Submit</button>
         <!---
         <input type="submit" onclick="submitAlert()">            
         <a href="#" onclick="submitAlert()" class="btn btn-primary">Submit</a>

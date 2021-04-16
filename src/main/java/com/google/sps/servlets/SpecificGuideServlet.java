@@ -31,7 +31,7 @@ public class SpecificGuideServlet extends HttpServlet{
         long id;
         try{
             id = getIdFromPath(request.getPathInfo());
-        }catch(NumberFormatException exeption){
+        }catch(NumberFormatException exception){
             response.setStatus(400);
             response.getWriter().print(gson.toJson(new Error("The guide id must be a number", 400)));
             return;
@@ -47,5 +47,21 @@ public class SpecificGuideServlet extends HttpServlet{
 
         response.getWriter().println(gson.toJson(guide.get()));
 
+    }
+
+    @Override
+    public void doDelete(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        long id;
+        try{
+            id = getIdFromPath(request.getPathInfo());
+        }catch(NumberFormatException exception){
+            response.setStatus(400);
+            response.getWriter().print(gson.toJson(new Error("The guide id must be a number", 400)));
+            return;
+        }
+
+        helper.delete(id);
+
+        response.setStatus(200);
     }
 }
