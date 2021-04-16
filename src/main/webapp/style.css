@@ -31,8 +31,6 @@ body::before {
 
 .navbar {
   background-color: #00993b !important;
-  /* border-bottom-left-radius: 10px !important; */
-  /* border-bottom-right-radius: 10px !important; */
   padding: 20px 30px;
 }
 
